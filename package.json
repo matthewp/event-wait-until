@@ -1,0 +1,27 @@
+{
+  "name": "event-wait-until",
+  "version": "1.0.0",
+  "description": "waitUntil for normal Events",
+  "main": "wait.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matthewp/event-wait-until.git"
+  },
+  "keywords": [
+    "waitUntil",
+    "events"
+  ],
+  "author": "Matthew Phillips",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/matthewp/event-wait-until/issues"
+  },
+  "homepage": "https://github.com/matthewp/event-wait-until#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  }
+}

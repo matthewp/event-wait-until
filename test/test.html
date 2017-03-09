@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>event-wait-until tests</title>
+  <link rel="stylesheet" href="../node_modules/mocha/mocha.css">
+  <script src="../wait.js"></script>
+  <script src="../node_modules/mocha/mocha.js"></script>
+  <script src="../node_modules/chai/chai.js"></script>
+  <script>
+    mocha.setup('bdd');
+  </script>
+</head>
+<body>
+  <div id="mocha"></div>
+
+  <div id="parent">
+    <div id="child"></div>
+  </div>
+
+  <script>
+    describe('Basics', function(){
+      const assert = chai.assert;
+      const waitUntil = eventWaitUntil;
+
+      it('waits', function(done){
+        parent.addEventListener('click', ev => {
+          assert.ok(true, 'This was called');
+          done();
+        }, {once: true});
+
+        child.addEventListener('click', ev => {
+          waitUntil(ev)(new Promise(resolve => {
+            let ee = ev;
+            resolve();
+          }));
+        }, {once: true});
+
+        child.dispatchEvent(new Event('click', {
+          bubbles: true
+        }));
+      });
+    })
+  </script>
+  <script>
+    mocha.run();
+  </script>
+</body>
+</html>
