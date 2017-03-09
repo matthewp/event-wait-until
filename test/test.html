@@ -17,6 +17,10 @@
     <div id="child"></div>
   </div>
 
+  <div id="anchorParent">
+    <a href="https://google.com" id="anchor">Click me</a>
+  </div>
+
   <script>
     describe('Basics', function(){
       const assert = chai.assert;
@@ -30,7 +34,6 @@
 
         child.addEventListener('click', ev => {
           waitUntil(ev)(new Promise(resolve => {
-            let ee = ev;
             resolve();
           }));
         }, {once: true});
@@ -39,7 +42,61 @@
           bubbles: true
         }));
       });
-    })
+    });
+
+    describe('stopPropagation', function(){
+      const assert = chai.assert;
+      const waitUntil = eventWaitUntil;
+
+      it('prevents propagation', function(done){
+        let parentCalled = false;
+        parent.addEventListener('click', _ => {
+          parentCalled = true;
+        });
+
+        child.addEventListener('click', ev => {
+          waitUntil(ev)(new Promise(resolve => {
+            ev.stopPropagation();
+            resolve();
+          }))
+          .then(_ => {
+            assert.equal(parentCalled, false, 'Parent was not called');
+          })
+          .then(done, done);
+        });
+
+        child.dispatchEvent(new Event('click', {
+          bubbles: true
+        }));
+      });
+    });
+
+    describe('preventDefault', function(){
+      const assert = chai.assert;
+      const waitUntil = eventWaitUntil;
+
+      it('prevents the default', function(done){
+        let parentCalled = false;
+        anchorParent.addEventListener('click', _ => {
+          parentCalled = true;
+        });
+
+        anchor.addEventListener('click', ev => {
+          waitUntil(ev)(new Promise(resolve => {
+            ev.preventDefault();
+            resolve();
+          }))
+          .then(_ => {
+            assert.equal(parentCalled, false, 'Parent was not called');
+          })
+          .then(done, done);
+        });
+
+        anchor.dispatchEvent(new Event('click', {
+          bubbles: true
+        }));
+      });
+    });
   </script>
   <script>
     mocha.run();
