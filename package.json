@@ -4,7 +4,7 @@
   "description": "waitUntil for normal Events",
   "main": "wait.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "testee --browsers firefox test/test.html"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
   "homepage": "https://github.com/matthewp/event-wait-until#readme",
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^3.2.0"
+    "mocha": "^3.2.0",
+    "testee": "^0.3.1"
   }
 }

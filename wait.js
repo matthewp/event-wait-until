@@ -5,7 +5,7 @@
     let originalTarget = event.originalTarget || event.target;
     // We need to dispatch on the parent, probably
     let ct = event.currentTarget.parentNode;
-    let path = [].slice.call(event.path);
+    let path = event.path ? [].slice.call(event.path) : undefined;
     event.stopPropagation();
     event.preventDefault();
 

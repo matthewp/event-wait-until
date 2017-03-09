@@ -99,7 +99,9 @@
     });
   </script>
   <script>
-    mocha.run();
+    window.addEventListener('load', _ => {
+      mocha.run();
+    }, {once:true});
   </script>
 </body>
 </html>
